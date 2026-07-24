@@ -1,0 +1,30 @@
+{
+  "name": "ussd-app",
+  "version": "0.1.0",
+  "description": "USSD backend service — session-based menu navigation over HTTP, built for a telco USSD gateway (Africa's Talking compatible).",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "simulate": "node scripts/simulate.js",
+    "simulate:comviva": "node scripts/simulateComviva.js",
+    "test": "jest --runInBand"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "ioredis": "^5.4.1",
+    "nodemailer": "^9.0.3",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.4",
+    "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
