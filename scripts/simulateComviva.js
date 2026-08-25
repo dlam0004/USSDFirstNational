@@ -5,7 +5,7 @@ const readline = require('readline');
 // and reads a CON/END-prefixed reply, neither of which this protocol uses.
 // This sends the same query-string-on-a-POST shape the real gateway will,
 // and reads the Freeflow/charge/cpRefId response headers back.
-const URL = process.env.USSD_COMVIVA_URL || 'http://localhost:3000/ussd/comviva';
+const URL = process.env.USSD_COMVIVA_URL || 'http://localhost:3001/ussd/comviva';
 const msisdn = process.env.USSD_PHONE || '27831234567';
 const sessionId = `sim-comviva-${Date.now()}`;
 // Only sent if set — matches the auth check being a no-op until

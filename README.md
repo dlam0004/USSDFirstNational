@@ -42,7 +42,7 @@ dependencies (in-memory session store).
 npm run dev
 ```
 
-The server starts on `http://localhost:3000` by default. Health check:
+The server starts on `http://localhost:3001` by default. Health check:
 `GET /health`.
 
 > In-memory sessions are for local dev/demo only — state is lost on restart
@@ -68,8 +68,8 @@ npm start
 
 ## Demoing via the Africa's Talking simulator + ngrok
 
-1. Start the app: `npm run dev` (default port 3000).
-2. Expose it publicly: `ngrok http 3000`, copy the `https://...` forwarding URL.
+1. Start the app: `npm run dev` (default port 3001).
+2. Expose it publicly: `ngrok http 3001`, copy the `https://...` forwarding URL.
 3. In the [Africa's Talking sandbox](https://account.africastalking.com/),
    create a USSD channel and set its callback URL to
    `https://<your-ngrok-domain>/ussd`.

@@ -1,6 +1,6 @@
 const readline = require('readline');
 
-const URL = process.env.USSD_URL || 'http://localhost:3000/ussd';
+const URL = process.env.USSD_URL || 'http://localhost:3001/ussd';
 const phoneNumber = process.env.USSD_PHONE || '+27831234567';
 const sessionId = `sim-${Date.now()}`;
 

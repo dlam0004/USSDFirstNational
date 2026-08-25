@@ -9,7 +9,7 @@ const env = process.env.NODE_ENV || 'development';
 module.exports = {
   env,
   isProduction: env === 'production',
-  port: Number(process.env.PORT) || 3000,
+  port: Number(process.env.PORT) || 3001,
   appName: process.env.APP_NAME || 'Acme',
 
   // Short prefix used when generating Service Reference numbers, e.g.
