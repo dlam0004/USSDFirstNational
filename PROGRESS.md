@@ -195,10 +195,33 @@ Where each answer goes once it lands (`.env`, never `.env.example`):
 
 - Real telco/gateway onboarding and production credentials.
 - Real ticketing/CRM execution — `src/services/ticketService.js` is a
-  documented in-memory mock (SR numbers generated locally, reset on
-  restart).
+  documented in-memory mock. **Ticket records** (used by Track Query) still
+  don't survive a restart. **SR numbers** are no longer part of this
+  limitation as of 2026-08-26 — see below.
 - Multi-language support.
 - SMS / USSD push notifications.
+
+## SR number uniqueness (fixed 2026-08-26)
+
+- [x] SR numbers were duplicating across restarts (e.g. `FNB-MS-1001` every
+      time) because the counter was a plain in-memory variable, reset on
+      every process start. Fixed: `ticketService.js` now uses Redis `INCR`
+      (`ussd:ticket:sequence` key) — atomic under concurrent requests,
+      persists across restarts. `server.js` awaits `ticketService.connect()`
+      at startup alongside `sessionStore.connect()`.
+- [x] Graceful, non-fatal fallback if Redis is unreachable (logs
+      `ticket_sequence_redis_unavailable` and reverts to the old in-memory
+      counter) — ticket creation must never break because of this. Verified
+      locally without Redis running: correct warning logged, SR numbers
+      still incremented correctly within the run.
+- [x] Independent of the `SESSION_STORE`/Redis-for-sessions decision (still
+      deferred, see below) — this always attempts Redis for the ticket
+      sequence specifically, since Redis is already running on the
+      deployment server regardless of that separate choice.
+- Ticket *records* themselves (for Track Query) are still the in-memory
+  `Map` — only the number-uniqueness problem is fixed here, not the
+  broader "does a ticket survive a restart" gap. That's still the same
+  documented real-ticketing-system gap above.
 
 ## Next steps
 

@@ -4,10 +4,12 @@ const app = require('./src/app');
 const config = require('./src/config');
 const logger = require('./src/config/logger');
 const sessionStore = require('./src/session/sessionStore');
+const ticketService = require('./src/services/ticketService');
 
 async function start() {
   try {
     await sessionStore.connect();
+    await ticketService.connect();
     app.listen(config.port, () => {
       logger.info('server_started', {
         port: config.port,
